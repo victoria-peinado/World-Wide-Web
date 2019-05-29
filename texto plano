@@ -82,6 +82,7 @@ Típico mensaje http de petición.
 Mensaje http de respuesta paquete contiene en su cabecera la siguiente línea Set-Cookie: “número de identificación para el usuario”. Esta línea es una petición  al navegador para que guarde cookies en el host del usuario.
 Si el navegador soporta cookies y las cookies están admitidas, cada petición posterior va a contener las siguientes líneas en su cabecera Cookie: “número de identificación para el usuario”.
 El sitio web va a mantener la cookies hasta que caduquen o sean eliminadas por lo que los componentes de las cookies son los siguientes:
+
 Componentes:
 	1) Línea de cabecera de cookie en el mensaje HTTP de respuesta.
 2) Línea de cabecera de cookie en el mensaje HTTP de petición.
