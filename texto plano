@@ -5,7 +5,8 @@ Una página web consta de objetos. Cada objeto seleccionable de una página est�
 Cuando hacemos click en un URL determinada, se envían muchos mensajes antes de poder acceder al objeto web deseado.
 Este intercambio de mensajes incluye hasta seis mensajes para traducir el nombre del servidor a su dirección IP, tres mensajes para establecer una conexión de tipo Protocolo de Control de Transmisión (TCP) entre el navegador y este servidor, cuatro mensajes para que el navegador envíe la solicitud HTTP “GET” (Obtener) y para la respuesta del servidor con la página solicitada (y para que cada lado acuse recibo del mensaje), y cuatro mensajes para deshacer la conexión TCP. 
 La arquitectura Internet, en lugar de utilizar el modelo OSI de 7 capas,  utiliza un modelo de 4 capas. Al más bajo nivel, hay una gran variedad de protocolos de red, denominados NET1, NET2, y así. En la práctica, estos protocolos son implementados por la combinación de hardware (por ejemplo, un adaptador de red) y software (por ejemplo, un controlador de un dispositivo de red). Por ejemplo, podrías encontrar Ethernet o protocolos inalámbricos (Como el estándar 802.11 Wi-Fi) en esta capa. (Estos protocolos a su vez pueden involucrar varias subcapas, pero la arquitectura de Internet no presume nada sobre ellos.) La segunda capa consiste en un único protocolo el IP. Este es el protocolo que soporta la interconexión de múltiples tecnologías de red en una sola, interred lógica. La tercera capa contiene dos protocolos principales: el protocolo de control de transmisión (TCP) y el protocolo de datagramas de usuario (UDP) para transportar datos.
-
+El protocolo a utilizar depende directamente de los datos a transportar. En nuestro caso, estamos trabajando con el protocolo de aplicación HTTP (capa 4) , entonces el protocolo de transporte va a ser el TCP. TCP es un protocolo mucho más complejo y de latencia mayor que el UDP, pero mucho más confiable. Es útil para HTTP ya que no es necesaria una velocidad muy alta de transmisión de datos, distinto sería si quisiéramos hacer streaming de audio y video, para lo cual sería más conveniente UDP. TCP utiliza ACK, es decir que envía un mensaje del receptor al emisor para aclarar que el mensaje enviado fue recibido. También reenvía los datos perdidos y llegan en el orden en el que fueron enviados. En cambio en UDP se ensamblan en el orden en el que llegan.
+El método de direccionamiento de la capa de transporte son los puertos. Se asocian aplicaciones con un puerto en particular. HTTP abre el puerto 80, y el de origen es dinámico.
 
 
 Usos de TCP:
@@ -21,6 +22,37 @@ HTTP, protocolo de transferencia de hipertexto:
 -Posee un modelo cliente/servidor:
 -cliente: navegador que solicita, recibe y “descarga” objetos Web.
 -servidor: servidor Web que envía los objetos correspondientes en respuesta a las peticiones.
+
+
+Mensajes HTTP:
+
+Petición HTTP: Las peticiones HTTP son mensajes enviados por un cliente, para iniciar una acción en el servidor. Su primera línea está formada por: 
+	1. Un método HTTP (GET, POST, HEAD, PUT, DELETE, etc...) que describe la acción que se está pidiendo que se realice.
+	   GET: indica que un archivo debe ser enviado hacia el cliente
+	   POST: indica que hay datos que van a ser enviados hacia el servidor
+	   HEAD: funciona como el GET pero el archivo no incluye el cuerpo 
+	   PUT: crea o reemplaza un archivo con los datos de la petición
+	   DELETE: elimina el archivo especificado
+	2. Es el objetivo de la petición normalmente es una URL o la dirección completa del protocolo, puerto y dominio.
+	   Su formato varía según los distintos métodos HTTP. Puede ser: 
+	   - Una dirección absoluta. Es el metodo mas comun, conocido como el formato original, se usa en los métodos GET, POST, HEAD y OPTIONS.
+	   - Una URL completa, conocido como el formato absoluto usado mayormente con GET.
+	   - Está formado por el nombre del dominio y opcionalmente el puerto seguido de ‘:’. Se conoce como formato de autoridad y se usa con CONNECT.
+	   - El formato de asterisco. Solo utiliza un asterisco, que representa al servidor entero en conjunto. Se usa con OPTIONS.
+	3. La versión de HTTP, la cual define la estructura de los mensajes, actuando como indicador de la versión que se espera que se use para la respuesta.
+Las siguientes líneas de la petición son las líneas de cabecera: estas son opcionales, pueden aportar información adicional a los servidores. Las cabeceras no diferencian mayusculas de minusculas, y van seguidas de ‘:’. Hay distintos tipos de cabeceras, como las generales, las de petición, y las de entidad. La generales (como “Via”) afectan al mensaje como una unidad completa. Las de petición (como User-Agent) modifican la petición especificandola en mayor detalle. Las de entidad (como Content-Length) se aplican al cuerpo de la petición (no necesita ser transmitida si el mensaje no tiene cuerpo). 
+La parte final de la petición es el cuerpo, que no es obligatorio (las peticiones que reclaman datos generalmente no necesitan uno). Hay dos categorías de cuerpos: los que tienen un único dato (que consiste en un archivo definido por las cabeceras Content-Type y Content-Length) y los que tienen múltiples datos que están formados por distintos contenidos, normalmente están asociados con los formularios HTML.
+
+Respuesta HTTP: La línea de inicio de una respuesta HTTP, se llama la línea de estado, y contienen la siguiente información: la versión del protocolo (normalmente HTTP/1.1), un código de estado indicando el éxito o fracaso de la petición, y un texto de estado que es una breve descripción en texto, a modo informativo, de lo que significa el código de estado, con el fin de que una persona pueda interpretar el mensaje HTTP.
+Algunos códigos de estado:
+200 OK : petición exitosa.
+301  Moved Permanently: el objeto demandado ha sido movido, su nueva localización se especifica posteriormente en el mensaje Location:.
+400 Bad Request: el servidor no comprendió el mensaje de petición. 
+404 Not Found: el documento pedido no existe en este servidor. 
+Líneas de cabecera: estas funcionan de la misma forma que las líneas de cabecera de las peticiones.
+Respecto al cuerpo, generalmente las respuestas con un código de estado de 201 o 204 prescinden de él. Hay tres categorías de cuerpos: los que tienen un único dato con longitud conocida y definido en las cabeceras (que consiste en un archivo definido por las cabeceras Content-Type y Content-Length), los que tienen un único dato de longitud desconocida y codificado en partes, y cuerpos con múltiples datos, cada uno con una sección distinta de información (este caso es relativamente raro y poco común).
+
+Fuente: https://developer.mozilla.org/es/docs/Web/HTTP/Messages#Peticiones_HTTP 
 
 
 Cookies: 
