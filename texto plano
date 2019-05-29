@@ -1,0 +1,38 @@
+World Wide Web es una de las aplicaciones Internet.
+
+Una página web consta de objetos. Cada objeto seleccionable de una página está enlazado a un identificador de la página u objeto al que hace referencia. Este identificador Uniform Resource Locator, URL, provee una manera de identificar todos los objetos posibles que pueden verse desde un navegador.
+
+Cuando hacemos click en un URL determinada, se envían muchos mensajes antes de poder acceder al objeto web deseado.
+Este intercambio de mensajes incluye hasta seis mensajes para traducir el nombre del servidor a su dirección IP, tres mensajes para establecer una conexión de tipo Protocolo de Control de Transmisión (TCP) entre el navegador y este servidor, cuatro mensajes para que el navegador envíe la solicitud HTTP “GET” (Obtener) y para la respuesta del servidor con la página solicitada (y para que cada lado acuse recibo del mensaje), y cuatro mensajes para deshacer la conexión TCP. 
+
+
+
+Usos de TCP:
+-El cliente inicia la conexión TCP (crea un socket) al servidor, puerto 80.
+-El servidor acepta la conexión TCP del cliente.
+-Los mensajes HTTP (mensajes de protocolo de la capa de aplicación) intercambiados entre el navegador ( cliente HTTP) y el servidor Web (servidor HTTP)
+-La conexión TCP se cierra.
+
+
+HTTP, protocolo de transferencia de hipertexto:
+-Es el protocolo de la capa de aplicación de la Web.
+-HTTP suele ser “sin estado, es decir, el servidor no conserva ninguna información sobre las peticiones previas de clientes (mantener estados es complicado y se hace con cookies).
+-Posee un modelo cliente/servidor:
+-cliente: navegador que solicita, recibe y “descarga” objetos Web.
+-servidor: servidor Web que envía los objetos correspondientes en respuesta a las peticiones.
+
+
+Cookies: 
+-Se usan para mantener el “estado”, conservan información sobre las peticiones previas de clientes.
+-La historia previa (estado)debe conservarse.
+-Si el servidor/cliente se bloquea, sus visiones del “estado” pueden ser inconsistentes y deben ser recompuestas.
+¿Cómo se crean? 
+Típico mensaje http de petición.
+Mensaje http de respuesta paquete contiene en su cabecera la siguiente línea Set-Cookie: “número de identificación para el usuario”. Esta línea es una petición  al navegador para que guarde cookies en el host del usuario.
+Si el navegador soporta cookies y las cookies están admitidas, cada petición posterior va a contener las siguientes líneas en su cabecera Cookie: “número de identificación para el usuario”.
+El sitio web va a mantener la cookies hasta que caduquen o sean eliminadas por lo que los componentes de las cookies son los siguientes:
+Componentes:
+	1) Línea de cabecera de cookie en el mensaje HTTP de respuesta.
+2) Línea de cabecera de cookie en el mensaje HTTP de petición.
+3) Archivo de cookie que se almacena en el host del usuario y que es gestionado por el navegador del usuario.
+4) Base de datos de respaldo en el sitio Web.
