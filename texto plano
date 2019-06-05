@@ -15,7 +15,7 @@ Usos de TCP:
 -Los mensajes HTTP (mensajes de protocolo de la capa de aplicación) intercambiados entre el navegador ( cliente HTTP) y el servidor Web (servidor HTTP)
 -La conexión TCP se cierra.
 
-
+ 
 HTTP, protocolo de transferencia de hipertexto:
 -Es el protocolo de la capa de aplicación de la Web.
 -HTTP suele ser “sin estado, es decir, el servidor no conserva ninguna información sobre las peticiones previas de clientes (mantener estados es complicado y se hace con cookies).
