@@ -1,0 +1,82 @@
+\documentclass{beamer}
+ 
+\usepackage[utf8]{inputenc}
+ 
+ 
+%Information to be included in the title page:
+\title{La World Wide Web}
+\author{Peinado, Rodriguez y Roggeroni}
+\institute{Instituto Politecnico Superior}
+\date{2019}
+ 
+ 
+ 
+\begin{document}
+ 
+\frame{\titlepage}
+ 
+\begin{frame}
+\frametitle{Modelo de tiempo de respuesta}
+\textbf{Round Trip Time (Tiempo de ida y vuelta):} \\ 
+Tiempo (en milisegundos) que le toma a un paquete en ser enviado desde el cliente hasta el servidor y de vuelta al cliente.\\~\\
+Puede ser afectado por: \\
+	- La distancia entre el cliente y el servidor. \\
+	- El medio de transmision utilizado.\\
+	- El trafico que haya en la red.\\
+	- La velocidad de respuesta que tenga el servidor.\\
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Conexiones HTTP}
+Las conexiones HTTP pueden ser \textbf{Persistentes} o \textbf{no persistentes}
+\end{frame}
+
+
+
+
+
+ 
+\begin{frame}
+\frametitle{Conexiones HTTP}
+\framesubtitle{conexiones persistentes}
+Las \textbf{conexiones persistentes} son aquellas en las que se mandan multiples objetos en una sola conexion. \\~\\
+El servidor deja la conexion abierta luego de enviar la primera respuesta. De esa forma se permiten enviar mas de un objeto. \\~\\
+El tiempo de transmision total de \textit{cada uno de los objetos} sera \textbf{RTT + tiempo de transmision}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Conexiones HTTP}
+\framesubtitle{conexiones no  persistentes}
+En las \textbf{conexiones no persistentes} se generan nuevas conexiones por cada objeto a enviar. Es decir, en cada conexion se envia un solo objeto. \\~\\
+El tiempo de transmision total en este caso de \textit{cada objeto} sera \textbf{2RTT + tiempo de transmision} \\~\\
+Un RTT que inicia la conexion, un RTT del objeto que se envia y el tiempo de transmision
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Autenticaciones HTTP}
+El metodo de autenticacion mas comun de HTTP es el basico. Este permite a los servidores solicitar credenciales antes de dejalo acceder al sitio. \\~\\
+Estas credenciales suelen ser \textbf{usuario y contraseña}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Autenticaciones HTTP}
+Un cliente intenta acceder a la pagina. El servidor le contesta con un estado de respuesta Unauthorize (no autorizado) y la informacion de como autorizarse. En el encabezado de ese mensaje aparecera WWW-AUTHENTICATE \\~\\
+En la cabecera de cada mensaje de peticion el cliente debera poner Authorization seguido de sus credenciales. \\~\\
+El servidor rebisara las credenciales y luego le enviara todo lo solicitado al cliente. \\~\\~\\
+Utiliza un sistema de codificacion Base64. La informacion enviada, entonces, no estara cifrada. 
+\end{frame}
+
+
+\end{document}
