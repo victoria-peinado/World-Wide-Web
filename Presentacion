@@ -14,6 +14,99 @@
 \begin{document}
  
 \frame{\titlepage}
+
+
+
+\begin{frame}
+\frametitle{Mensaje HTTP de peticion}
+\framesubtitle{Primera linea: primera parte}
+Las peticiones HTTP son mensajes enviados por un cliente, para iniciar una acción en el servidor.
+Su primera línea está formada por 3 partes: \\
+- Un método HTTP (GET, POST, HEAD, PUT, DELETE, etc...) que describe la acción que se está pidiendo que se realice.\\
+\textbf{GET:} indica que un archivo debe ser enviado hacia el cliente\\
+\textbf{POST:} indica que hay datos que van a ser enviados hacia el servidor\\
+\textbf{HEAD:} funciona como el GET pero el archivo no incluye el cuerpo \\
+\textbf{PUT:} crea o reemplaza un archivo con los datos de la petición\\
+\textbf{DELETE:} elimina el archivo especificado \\
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Mensaje HTTP de peticion}
+\framesubtitle{Primera linea: segunda parte}
+- El objetivo de la petición, que normalmente es una URL o la dirección completa del protocolo, puerto y dominio.\\
+Su formato varía según los distintos métodos HTTP. \\
+Puede ser: \\ 
+- Una dirección absoluta. Es el metodo mas comun, conocido como el formato original, se usa en los métodos GET, POST, HEAD y OPTIONS. \\
+- Una URL completa, conocido como el formato absoluto usado mayormente con GET.\\
+- Está formado por el nombre del dominio y opcionalmente el puerto seguido de ‘:’. Se conoce como formato de autoridad y se usa con CONNECT.\\
+- El formato de asterisco. Solo utiliza un asterisco, que representa al servidor entero en conjunto. Se usa con OPTIONS.\\
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Mensaje HTTP de peticion}
+\framesubtitle{Primera linea: tercera parte}
+- La versión de HTTP, la cual define la estructura de los mensajes, actuando como indicador de la versión que se espera que se use para la respuesta.
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Mensaje HTTP de peticion}
+\framesubtitle{Lineas de Cabecera}
+Las siguientes líneas de la petición son las líneas de cabecera: estas son opcionales, pueden aportar información adicional a los servidores. Las cabeceras no diferencian mayusculas de minusculas, y van seguidas de ‘:’. Hay distintos tipos de cabeceras, como las generales, las de petición, y las de entidad. La generales (como “Via”) afectan al mensaje como una unidad completa. Las de petición (como User-Agent) modifican la petición especificandola en mayor detalle. Las de entidad (como Content-Length) se aplican al cuerpo de la petición (no necesita ser transmitida si el mensaje no tiene cuerpo). 
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Mensaje HTTP de peticion}
+\framesubtitle{Cuerpo}
+La parte final de la petición es el cuerpo, que no es obligatorio (las peticiones que reclaman datos generalmente no necesitan uno). Hay dos categorías de cuerpos: los que tienen un único dato (que consiste en un archivo definido por las cabeceras Content-Type y Content-Length) y los que tienen múltiples datos que están formados por distintos contenidos, normalmente están asociados con los formularios HTML.
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Mensajes HTTP de respuesta}
+La línea de inicio de una respuesta HTTP, se llama la línea de estado, y contienen la siguiente información: la versión del protocolo (normalmente HTTP/1.1), un código de estado indicando el éxito o fracaso de la petición, y un texto de estado que es una breve descripción en texto, a modo informativo, de lo que significa el código de estado, con el fin de que una persona pueda interpretar el mensaje HTTP.
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Mensajes HTTP de respuesta}
+\framesubtitle{Lineas de cabecera}
+Estas funcionan de la misma forma que las líneas de cabecera de las peticiones.
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Mensajes HTTP de respuesta}
+\framesubtitle{Cuerpo}
+Respecto al cuerpo, generalmente las respuestas con un código de estado de 201 o 204 prescinden de él. Hay tres categorías de cuerpos: los que tienen un único dato con longitud conocida y definido en las cabeceras (que consiste en un archivo definido por las cabeceras Content-Type y Content-Length), los que tienen un único dato de longitud desconocida y codificado en partes, y cuerpos con múltiples datos, cada uno con una sección distinta de información (este caso es relativamente raro y poco común).
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Mensajes HTTP de respuesta}
+\framesubtitle{Algunos codigos de estado}
+\textbf{200 OK:} petición exitosa. \\
+\textbf{301  Moved Permanently:} el objeto demandado ha sido movido, su nueva localización se especifica posteriormente en el mensaje Location:. \\
+\textbf{400 Bad Request:} el servidor no comprendió el mensaje de petición. \\
+\textbf{404 Not Found:} el documento pedido no existe en este servidor. \\
+\end{frame}
+
+
  
 \begin{frame}
 \frametitle{Modelo de tiempo de respuesta}
