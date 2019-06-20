@@ -1,19 +1,69 @@
 \documentclass{beamer}
- 
 \usepackage[utf8]{inputenc}
- 
- 
+\usetheme{Pittsburgh}
+\usecolortheme{Beaver}
+
 %Information to be included in the title page:
 \title{La World Wide Web}
 \author{Peinado, Rodriguez y Roggeroni}
 \institute{Instituto Politecnico Superior}
 \date{2019}
- 
- 
- 
 \begin{document}
- 
 \frame{\titlepage}
+
+
+\begin{frame}
+\frametitle{World Wide Web}
+\framesubtitle{Introducción}
+La World Wide Web, generalmente conocida como la Web, es un sistema de documentos de hipertexto vinculados accesibles por Internet.\\~\\
+Una página web consta de objetos. Cada objeto seleccionable de una pagina posee un URL (Uniform Resource Locator) que permite identificar todos los objetos posibles que pueden verse desde un navegador.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{World Wide Web}
+Cuando hacemos click en un URL determinada, se envían muchos mensajes antes de poder acceder al objeto web deseado. \\~\\
+
+\begin{itemize}
+\item Hasta 6 para traducir el nombre del servidor a su dir IP
+\item 3 para establecer conexion de tipo TCP entre el servidor y el navegador
+\item 4 para que el navegador envíe la solicitud HTTP “GET” (Obtener) y para la respuesta del servidor con la página solicitada (y para que cada lado acuse recibo del mensaje)
+\item 4 para deshacer la conexión TCP
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{HTTP}
+\framesubtitle{Introducción}
+
+Hypertext Transfer Protocol (HTTP) (o Protocolo de Transferencia de Hipertexto en español) es un protocolo de la capa de aplicación para la transmisión de documentos hipermedia, como HTML.\\~\\
+Aunque en la mayoría de casos se basa en una conexión del tipo TCP/IP, puede ser usado sobre cualquier capa de transporte segura o de confianza, es decir, sobre cualquier protocolo que no pierda mensajes silenciosamente, tal como UDP.
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{HTTP}
+\framesubtitle{Protocolo sin estado}
+
+HTTP es un protocolo sin estado, es decir que trata cada petición como una transacción independiente que no tiene relación con cualquier solicitud anterior, de modo que la comunicación se compone de pares independientes de solicitud y respuesta. \\~\\
+Un protocolo sin estado no requiere que el servidor retenga información de la sesión o de estado acerca de cada socio de las comunicaciones durante la duración de múltiples peticiones
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Usos de TCP}
+\begin{itemize}
+\item El cliente inicia la conexión TCP (crea un socket) al servidor, puerto 80.
+\item El servidor acepta la conexión TCP del cliente.
+\item Los mensajes HTTP (mensajes de protocolo de la capa de aplicación) intercambiados entre el navegador (cliente HTTP) y el servidor Web (servidor HTTP).
+\item La conexión TCP se cierra.
+\end{itemize}
+
+\end{frame}
 
 
 
@@ -22,7 +72,9 @@
 \framesubtitle{Primera linea: primera parte}
 Las peticiones HTTP son mensajes enviados por un cliente, para iniciar una acción en el servidor.
 Su primera línea está formada por 3 partes: \\
-- Un método HTTP (GET, POST, HEAD, PUT, DELETE, etc...) que describe la acción que se está pidiendo que se realice.\\
+\begin{itemize}
+\item Un método HTTP (GET, POST, HEAD, PUT, DELETE, etc...) que describe la acción que se está pidiendo que se realice.\\
+\end{itemize}
 \textbf{GET:} indica que un archivo debe ser enviado hacia el cliente\\
 \textbf{POST:} indica que hay datos que van a ser enviados hacia el servidor\\
 \textbf{HEAD:} funciona como el GET pero el archivo no incluye el cuerpo \\
@@ -33,15 +85,17 @@ Su primera línea está formada por 3 partes: \\
 
 
 \begin{frame}
-\frametitle{Mensaje HTTP de peticion}
-\framesubtitle{Primera linea: segunda parte}
-- El objetivo de la petición, que normalmente es una URL o la dirección completa del protocolo, puerto y dominio.\\
+\frametitle{Mensaje HTTP de petición}
+\framesubtitle{Primera línea: segunda parte}
+
+El objetivo de la petición, que normalmente es una URL o la dirección completa del protocolo, puerto y dominio.\\
 Su formato varía según los distintos métodos HTTP. \\
 Puede ser: \\ 
-- Una dirección absoluta. Es el metodo mas comun, conocido como el formato original, se usa en los métodos GET, POST, HEAD y OPTIONS. \\
-- Una URL completa, conocido como el formato absoluto usado mayormente con GET.\\
-- Está formado por el nombre del dominio y opcionalmente el puerto seguido de ‘:’. Se conoce como formato de autoridad y se usa con CONNECT.\\
-- El formato de asterisco. Solo utiliza un asterisco, que representa al servidor entero en conjunto. Se usa con OPTIONS.\\
+\begin{itemize}
+\item Una dirección absoluta. Es el método más común, conocido como el formato original, se usa en los métodos GET, POST, HEAD y OPTIONS. 
+\item Una URL completa, conocido como el formato absoluto usado mayormente con GET.\\\item Está formado por el nombre del dominio y opcionalmente el puerto seguido de ‘:’. Se conoce como formato de autoridad y se usa con CONNECT.\\
+\item El formato de asterisco. Solo utiliza un asterisco, que representa al servidor entero en conjunto. Se usa con OPTIONS.\\
+\end{itemize}
 \end{frame}
 
 
@@ -49,16 +103,18 @@ Puede ser: \\
 \begin{frame}
 \frametitle{Mensaje HTTP de peticion}
 \framesubtitle{Primera linea: tercera parte}
-- La versión de HTTP, la cual define la estructura de los mensajes, actuando como indicador de la versión que se espera que se use para la respuesta.
+La versión de HTTP, la cual define la estructura de los mensajes, actuando como indicador de la versión que se espera que se use para la respuesta.
 \end{frame}
 
 
 
 
 \begin{frame}
-\frametitle{Mensaje HTTP de peticion}
-\framesubtitle{Lineas de Cabecera}
-Las siguientes líneas de la petición son las líneas de cabecera: estas son opcionales, pueden aportar información adicional a los servidores. Las cabeceras no diferencian mayusculas de minusculas, y van seguidas de ‘:’. Hay distintos tipos de cabeceras, como las generales, las de petición, y las de entidad. La generales (como “Via”) afectan al mensaje como una unidad completa. Las de petición (como User-Agent) modifican la petición especificandola en mayor detalle. Las de entidad (como Content-Length) se aplican al cuerpo de la petición (no necesita ser transmitida si el mensaje no tiene cuerpo). 
+\frametitle{Mensaje HTTP de petición}
+\framesubtitle{Líneas de Cabecera}
+Las siguientes líneas de la petición son las líneas de cabecera. Sson opcionales, pueden aportar información adicional a los servidores.\\~\\
+Las cabeceras no diferencian mayúsculas de minúsculas, y van seguidas de ‘:’.\\~\\
+ Hay distintos tipos de cabeceras, como las generales, las de petición, y las de entidad. Las generales (como “Via”) afectan al mensaje como una unidad completa. Las de petición (como User-Agent) modifican la petición especificándola en mayor detalle. Las de entidad (como Content-Length) se aplican al cuerpo de la petición (no necesita ser transmitida si el mensaje no tiene cuerpo). 
 \end{frame}
 
 
@@ -67,7 +123,8 @@ Las siguientes líneas de la petición son las líneas de cabecera: estas son op
 \begin{frame}
 \frametitle{Mensaje HTTP de peticion}
 \framesubtitle{Cuerpo}
-La parte final de la petición es el cuerpo, que no es obligatorio (las peticiones que reclaman datos generalmente no necesitan uno). Hay dos categorías de cuerpos: los que tienen un único dato (que consiste en un archivo definido por las cabeceras Content-Type y Content-Length) y los que tienen múltiples datos que están formados por distintos contenidos, normalmente están asociados con los formularios HTML.
+La parte final de la petición es el cuerpo, que no es obligatorio (las peticiones que reclaman datos generalmente no necesitan uno). \\~\\
+Hay dos categorías de cuerpos: los que tienen un único dato (que consiste en un archivo definido por las cabeceras Content-Type y Content-Length) y los que tienen múltiples datos que están formados por distintos contenidos, normalmente están asociados con los formularios HTML.
 \end{frame}
 
 
@@ -101,22 +158,23 @@ Respecto al cuerpo, generalmente las respuestas con un código de estado de 201 
 \frametitle{Mensajes HTTP de respuesta}
 \framesubtitle{Algunos codigos de estado}
 \textbf{200 OK:} petición exitosa. \\
-\textbf{301  Moved Permanently:} el objeto demandado ha sido movido, su nueva localización se especifica posteriormente en el mensaje Location:. \\
+\textbf{301 Moved Permanently:} el objeto demandado ha sido movido, su nueva localización se especifica posteriormente en el mensaje Location:. \\
 \textbf{400 Bad Request:} el servidor no comprendió el mensaje de petición. \\
 \textbf{404 Not Found:} el documento pedido no existe en este servidor. \\
 \end{frame}
 
 
- 
 \begin{frame}
 \frametitle{Modelo de tiempo de respuesta}
 \textbf{Round Trip Time (Tiempo de ida y vuelta):} \\ 
 Tiempo (en milisegundos) que le toma a un paquete en ser enviado desde el cliente hasta el servidor y de vuelta al cliente.\\~\\
 Puede ser afectado por: \\
-	- La distancia entre el cliente y el servidor. \\
-	- El medio de transmision utilizado.\\
-	- El trafico que haya en la red.\\
-	- La velocidad de respuesta que tenga el servidor.\\
+\begin{itemize}
+\item La distancia entre el cliente y el servidor. \\
+\item El medio de transmisión utilizado.\\
+\item El tráfico que haya en la red.\\
+\item La velocidad de respuesta que tenga el servidor.\\
+\end{itemize}
 \end{frame}
 
 
@@ -131,13 +189,12 @@ Las conexiones HTTP pueden ser \textbf{Persistentes} o \textbf{no persistentes}
 
 
 
- 
 \begin{frame}
 \frametitle{Conexiones HTTP}
 \framesubtitle{conexiones persistentes}
-Las \textbf{conexiones persistentes} son aquellas en las que se mandan multiples objetos en una sola conexion. \\~\\
-El servidor deja la conexion abierta luego de enviar la primera respuesta. De esa forma se permiten enviar mas de un objeto. \\~\\
-El tiempo de transmision total de \textit{cada uno de los objetos} sera \textbf{RTT + tiempo de transmision}
+Las \textbf{conexiones persistentes} son aquellas en las que se mandan múltiples objetos en una sola conexión. \\~\\
+El servidor deja la conexión abierta luego de enviar la primera respuesta. De esa forma se permiten enviar más de un objeto. \\~\\
+El tiempo de transmisión total de \textit{cada uno de los objetos} será \textbf{RTT + tiempo de transmisión}
 \end{frame}
 
 
@@ -145,10 +202,10 @@ El tiempo de transmision total de \textit{cada uno de los objetos} sera \textbf{
 
 \begin{frame}
 \frametitle{Conexiones HTTP}
-\framesubtitle{conexiones no  persistentes}
-En las \textbf{conexiones no persistentes} se generan nuevas conexiones por cada objeto a enviar. Es decir, en cada conexion se envia un solo objeto. \\~\\
-El tiempo de transmision total en este caso de \textit{cada objeto} sera \textbf{2RTT + tiempo de transmision} \\~\\
-Un RTT que inicia la conexion, un RTT del objeto que se envia y el tiempo de transmision
+\framesubtitle{conexiones no persistentes}
+En las \textbf{conexiones no persistentes} se generan nuevas conexiones por cada objeto a enviar. Es decir, en cada conexión se envía un solo objeto. \\~\\
+El tiempo de transmisión total en este caso de \textit{cada objeto} será \textbf{2RTT + tiempo de transmisión} \\~\\
+Un RTT que inicia la conexión, un RTT del objeto que se envía y el tiempo de transmisión
 \end{frame}
 
 
@@ -156,7 +213,7 @@ Un RTT que inicia la conexion, un RTT del objeto que se envia y el tiempo de tra
 
 \begin{frame}
 \frametitle{Autenticaciones HTTP}
-El metodo de autenticacion mas comun de HTTP es el basico. Este permite a los servidores solicitar credenciales antes de dejalo acceder al sitio. \\~\\
+El método de autenticación más común de HTTP es el básico. Este permite a los servidores solicitar credenciales antes de dejarlo acceder al sitio. \\~\\
 Estas credenciales suelen ser \textbf{usuario y contraseña}
 \end{frame}
 
@@ -165,10 +222,56 @@ Estas credenciales suelen ser \textbf{usuario y contraseña}
 
 \begin{frame}
 \frametitle{Autenticaciones HTTP}
-Un cliente intenta acceder a la pagina. El servidor le contesta con un estado de respuesta Unauthorize (no autorizado) y la informacion de como autorizarse. En el encabezado de ese mensaje aparecera WWW-AUTHENTICATE \\~\\
-En la cabecera de cada mensaje de peticion el cliente debera poner Authorization seguido de sus credenciales. \\~\\
-El servidor rebisara las credenciales y luego le enviara todo lo solicitado al cliente. \\~\\~\\
-Utiliza un sistema de codificacion Base64. La informacion enviada, entonces, no estara cifrada. 
+Un cliente intenta acceder a la página. El servidor le contesta con un estado de respuesta Unauthorize (no autorizado) y la información de como autorizarse. En el encabezado de ese mensaje aparecerá WWW-AUTHENTICATE \\~\\
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Autenticaciones HTTP}
+En la cabecera de cada mensaje de petición el cliente deberá poner Authorization seguido de sus credenciales. \\~\\
+El servidor revisará las credenciales y luego le enviará todo lo solicitado al cliente. \\~\\~\\
+Utiliza un sistema de codificación Base64. La información enviada, entonces, no estará cifrada. 
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Cookies}
+
+\begin{itemize}
+\item Se usan para mantener el “estado”, conservan información sobre las peticiones previas de clientes.
+\item La historia previa (estado)debe conservarse.
+\item Si el servidor/cliente se bloquea, sus visiones del “estado” pueden ser inconsistentes y deben ser recompuestas.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Cookies}
+\framesubtitle{Como se crean}
+
+Típico mensaje http de petición.
+Mensaje http de respuesta paquete contiene en su cabecera la siguiente línea Set-Cookie: \textit{“número de identificación para el usuario”}. Esta línea es una petición al navegador para que guarde cookies en el host del usuario.
+Si el navegador soporta cookies y las cookies están admitidas, cada petición posterior va a contener las siguientes líneas en su cabecera Cookie: “número de identificación para el usuario”.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Cookies}
+\framesubtitle{Componentes}
+
+El sitio web va a mantener la cookies hasta que caduquen o sean eliminadas por lo que los componentes de las cookies son los siguientes:
+
+\begin{itemize}
+\item Línea de cabecera de cookie en el mensaje HTTP de respuesta.
+\item Línea de cabecera de cookie en el mensaje HTTP de petición.
+\item Archivo de cookie que se almacena en el host del usuario y que es gestionado por el navegador del usuario.
+\item Base de datos de respaldo en el sitio Web.
+\end{itemize}
+
 \end{frame}
 
 
